@@ -15,7 +15,7 @@ public class ProjectEuler {
 				problem = Integer.parseInt(str);
 				
 				if (problem == 0) {
-					System.out.print("Goodbye!");
+					System.out.println("Goodbye!");
 					doAgain = false;
 				}
 				else if (problem == 1) result = problem1();
@@ -25,6 +25,7 @@ public class ProjectEuler {
 				else if (problem == 5) result = problem5();
 				else if (problem == 6) result = problem6();
 				else if (problem == 7) result = problem7();
+                else if (problem == 8) result = problem8();
 					
 				else throw new Exception();
 				if (doAgain) System.out.printf("result: %.0f\n", result);
@@ -142,12 +143,11 @@ public class ProjectEuler {
 	}
 	
 	private static int sum (int n) {
-		return (n * (n + 1)) / 2;
+        return (n * (n + 1)) / 2;
 	}
 	
 	private static int problem7() {
 		int primesFound = 0, i = 1;
-		//System.out.println(primesFound <= 10001);
 		while (primesFound <= 10001) {
 			if (isPrime(i)) primesFound++;
 			if (primesFound < 10001) i++;
@@ -161,10 +161,46 @@ public class ProjectEuler {
 		for (int i = 3; i * i <= n; i+= 2) {
 			if (n % i == 0) return false;
 		}
-		return true;
+        return true;
 	}
 	
-	private static int problem8() {
+	private static double problem8() {
+        long max = 0;
+        String str = "73167176531330624919225119674426574742355349194934" +
+        "96983520312774506326239578318016984801869478851843" +
+        "85861560789112949495459501737958331952853208805511" +
+        "12540698747158523863050715693290963295227443043557" +
+        "66896648950445244523161731856403098711121722383113" +
+        "62229893423380308135336276614282806444486645238749" +
+        "30358907296290491560440772390713810515859307960866" +
+        "70172427121883998797908792274921901699720888093776" +
+        "65727333001053367881220235421809751254540594752243" +
+        "52584907711670556013604839586446706324415722155397" +
+        "53697817977846174064955149290862569321978468622482" +
+        "83972241375657056057490261407972968652414535100474" +
+        "82166370484403199890008895243450658541227588666881" +
+        "16427171479924442928230863465674813919123162824586" +
+        "17866458359124566529476545682848912883142607690042" +
+        "24219022671055626321111109370544217506941658960408" +
+        "07198403850962455444362981230987879927244284909188" +
+        "84580156166097919133875499200524063689912560717606" +
+        "05886116467109405077541002256983155200055935729725" +
+        "71636269561882670428252483600823257530420752963450";
+        
+        for (int i = 0; i < str.length() - 12; i++) {
+            long temp = 1;
+            //System.out.print(str.charAt(i));
+            for (int j = 0; j < 13; j++) {
+                //System.out.print(str.charAt(i + j));
+                int currNum = Integer.valueOf(str.charAt(i + j));
+                temp = temp * currNum;
+            }
+            if (temp > max) {
+                System.out.println("max = " + max);
+                max = temp;
+            }
+            //System.out.println();
+        }
 		return 0;
 	}
 
