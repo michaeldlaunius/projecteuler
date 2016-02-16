@@ -26,6 +26,8 @@ public class ProjectEuler {
 				else if (problem == 6) result = problem6();
 				else if (problem == 7) result = problem7();
                 else if (problem == 8) result = problem8();
+                else if (problem == 9) result = problem9();
+                else if (problem == 10) result = problem10();
 					
 				else throw new Exception();
 				if (doAgain) System.out.printf("result: %.0f\n", result);
@@ -107,12 +109,6 @@ public class ProjectEuler {
 		return maxPalindrome;
 	}
 	
-	private static boolean isPalindrome(int n) {
-		String input = Integer.toString(n);
-		String reverse = new StringBuilder(input).reverse().toString();
-		return input.equals(reverse);
-	}
-	
 	private static int problem5() {
 		int smallestMultiple = 20;
 		boolean found = false;
@@ -138,14 +134,6 @@ public class ProjectEuler {
 		
 	}
 	
-	private static int sumOfSquares(int n) {
-		return ( (n * (n+1) * (2 * n + 1)/6) );
-	}
-	
-	private static int sum (int n) {
-        return (n * (n + 1)) / 2;
-	}
-	
 	private static int problem7() {
 		int primesFound = 0, i = 1;
 		while (primesFound <= 10001) {
@@ -153,15 +141,6 @@ public class ProjectEuler {
 			if (primesFound < 10001) i++;
 		}
 		return i;
-	}
-	
-	private static boolean isPrime(int n) {
-		if (n % 2 == 0) return false;
-		
-		for (int i = 3; i * i <= n; i+= 2) {
-			if (n % i == 0) return false;
-		}
-        return true;
 	}
 	
 	private static double problem8() {
@@ -189,22 +168,80 @@ public class ProjectEuler {
         
         for (int i = 0; i < str.length() - 13; i++) {
             long temp = 1;
-            //System.out.print(str.charAt(i));
             for (int j = 0 + i; j < 13 + i; j++) {
-                //System.out.print(str.charAt(i + j));
                 int currNum = Integer.parseInt(str.substring(j, j+1));
-                System.out.print(currNum + "*");
                 temp = temp * currNum;
             }
-            System.out.println(" = " + temp);
             if (temp > max) {
                 max = temp;
-                System.out.println("max = " + max);
             }
-            //System.out.println();
         }
-        System.out.println("FINAL MAX = " + max);
+        System.out.println("max = " + max);
 		return 0;
 	}
+    
+    /* PROBLEM 9
+     A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
+     
+     a2 + b2 = c2
+     For example, 32 + 42 = 9 + 16 = 25 = 52.
+     
+     There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+     Find the product abc.*/
+    private static double problem9() {
+        for (int c = 10; c < 1000; c++) {
+            for (int b = 1; b < c; b++) {
+                for (int a = 0; a < b; a++) {
+                    if (a + b + c == 1000 && (a*a) + (b*b) == (c*c)) {
+                        System.out.println("a: " + a + " b: " + b + " c: " + c);
+                        return a * b * c;
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+    
+    /* PROBLEM 10
+     The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+     
+     Find the sum of all the primes below two million.*/
+    private static double problem10() {
+        double sumOfPrimes = 0;
+        //System.out.print("Primes below 2,000,000:");
+        for (int i = 2; i < 2000000; i++) {
+            if (isPrime(i)) {
+                //System.out.print(" " + i);
+                sumOfPrimes = sumOfPrimes + i;
+            }
+        }
+        System.out.println();
+        return sumOfPrimes;
+    }
+    
+    //-------------------Helper Functions (in alphabetical order)----------------------
+    private static boolean isPalindrome(int n) {
+        String input = Integer.toString(n);
+        String reverse = new StringBuilder(input).reverse().toString();
+        return input.equals(reverse);
+    }
+    
+    private static boolean isPrime(int n) {
+        if (n == 2) return true;
+        else if (n % 2 == 0) return false;
+        
+        for (int i = 3; i * i <= n; i+= 2) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+    
+    private static int sum (int n) {
+        return (n * (n + 1)) / 2;
+    }
+    
+    private static int sumOfSquares(int n) {
+        return ( (n * (n+1) * (2 * n + 1)/6) );
+    }
 
 }
