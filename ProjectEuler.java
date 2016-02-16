@@ -187,20 +187,23 @@ public class ProjectEuler {
         "05886116467109405077541002256983155200055935729725" +
         "71636269561882670428252483600823257530420752963450";
         
-        for (int i = 0; i < str.length() - 12; i++) {
+        for (int i = 0; i < str.length() - 13; i++) {
             long temp = 1;
             //System.out.print(str.charAt(i));
-            for (int j = 0; j < 13; j++) {
+            for (int j = 0 + i; j < 13 + i; j++) {
                 //System.out.print(str.charAt(i + j));
-                int currNum = Integer.valueOf(str.charAt(i + j));
+                int currNum = Integer.parseInt(str.substring(j, j+1));
+                System.out.print(currNum + "*");
                 temp = temp * currNum;
             }
+            System.out.println(" = " + temp);
             if (temp > max) {
-                System.out.println("max = " + max);
                 max = temp;
+                System.out.println("max = " + max);
             }
             //System.out.println();
         }
+        System.out.println("FINAL MAX = " + max);
 		return 0;
 	}
 
